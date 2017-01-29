@@ -1,0 +1,21 @@
+<div style="padding:50px;">
+  <h1 style="text-align: center;">SIMACOGO</h1>
+</div>
+<div id="container">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="ui form">
+    <div class="rowValue">
+      <label for="rowInput">Row Value:</label>
+      <input type="text" id="rowInput" placeholder="1" name="rowValue" ngModel>
+      <button type="submit" class="ui button">Submit</button>
+    </div>
+  </form>
+
+  <div *ngFor="let b of board; let i = index">
+    <div class="square" id="square-{{i}}"*ngIf="i%9==0 && i!=0">
+      {{b}}
+    </div>
+    <div class="square" id="square-{{i}}" *ngIf="i%9!=0">
+      {{b}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+#container{
+  margin:0 auto;
+  width:600px;
+}
+.square{
+  border:1px solid #2c3e50;
+  width:60px;
+  height: 60px;
+  float:left;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
+}
+
+.rowValue{
+  margin-bottom:3em;
+}
