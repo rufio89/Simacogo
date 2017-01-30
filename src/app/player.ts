@@ -4,12 +4,12 @@ export class Player {
 
   constructor(){}
 
-  makeMove(rowInput, currentState): State{
+  makeMove(rowInput, currentState, turn, color): State{
     var currentElem;
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
       currentElem = document.getElementById("square-" + i);
       if(!currentState[i] && currentElem.innerText == ""){
-        currentState.setCurrentState(i,"O", "#FFF");
+        currentState.setCurrentState(i,turn, color);
         break;
       }
     }

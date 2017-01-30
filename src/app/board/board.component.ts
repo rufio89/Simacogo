@@ -14,6 +14,7 @@ export class BoardComponent{
   rows:Array<Number> = [1,2,3,4,5,6,7,8,9] ;
   player1: Player = new Player();
   player2: Player = new Player();
+  player1Turn: boolean = true;
   constructor() {
     this.board = this.currentState.getCurrentState();
   }
@@ -22,7 +23,14 @@ export class BoardComponent{
 
   onSubmit(form: any): void{
     console.log(form);
-    this.currentState = this.player1.makeMove(form.rowValue, this.currentState);
+    if(this.player1Turn) {
+      this.currentState = this.player1.makeMove(form.rowValue, this.currentState, "O", "#FFF");
+      this.player1Turn = !this.player1Turn;
+    }
+    else{
+      this.currentState = this.player2.makeMove(form.rowValue, this.currentState, "X", "#000");
+      this.player1Turn = !this.player1Turn;
+    }
     console.dir(this.currentState);
     console.dir(this.board);
   }
