@@ -4,13 +4,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { NodeComponent } from './node/node.component';
+import { BoardComponent } from './board/board.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NodeComponent
+    BoardComponent
   ],
   imports: [
     BrowserModule,

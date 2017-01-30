@@ -10,12 +10,15 @@
     </div>
   </form>
 
+  <div *ngFor="let r of rows; let i = index">
+    <div class="row">{{r}}</div>
+  </div>
   <div *ngFor="let b of board; let i = index">
     <div class="square" id="square-{{i}}"*ngIf="i%9==0 && i!=0">
-      {{b}}
+      <div [style.color]="b.getColor()">{{b.getValue()}}</div>
     </div>
-    <div class="square" id="square-{{i}}" *ngIf="i%9!=0">
-      {{b}}
+    <div   class="square" id="square-{{i}}" *ngIf="i%9!=0">
+      <div [style.color]="b.getColor()">{{b.getValue()}}</div>
     </div>
   </div>
 </div>

@@ -1,19 +1,25 @@
+import {Token} from "./token";
 export class State {
-   currentState: Array<string> = new Array<string>(82);
+   currentState: Array<Token> = new Array<Token>(82);
 
 
   constructor(){
-
+    this.generateBoard();
   };
 
+  generateBoard(){
+    for(var i=0;i<this.currentState.length;i++){
+      this.currentState[i] = new Token();
+    }
+  }
 
-
-  getCurrentState(): Array<string>{
+  getCurrentState(): Array<Token>{
     return this.currentState;
   }
 
-  setCurrentState(i, newValue): void{
-    this.currentState[i]= newValue;
+  setCurrentState(i, newValue, newColor): void{
+    this.currentState[i].setValue(newValue);
+    this.currentState[i].setColor(newColor);
   }
 
 }
