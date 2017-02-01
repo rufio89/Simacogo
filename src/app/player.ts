@@ -1,6 +1,6 @@
 import {State} from "./state";
 export class Player {
-  private _score=0;
+  private _score: number =0;
 
 
   constructor(){
@@ -9,7 +9,7 @@ export class Player {
 
   makeMove(rowInput, currentState, turn, color): State{
     var currentElem;
-    let index: Number = 0;
+    let index: number = 0;
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
       currentElem = document.getElementById("square-" + i);
       if(!currentState[i] && currentElem.innerText == ""){
@@ -80,7 +80,7 @@ export class Player {
     }
   }
 
-  getScore(): Number{
+  getScore(): number{
     return this._score;
   }
 

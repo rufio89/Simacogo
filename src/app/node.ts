@@ -3,17 +3,16 @@ export class Node {
   private _parent: Node;
   private _currentState: State;
   private _action: string;
-  private _cost: Number;
-  private _turn: string;
-  private _color: string;
+  private _player1Score: number;
+  private _player2Score: number;
 
 
 
-  constructor(parent, state, action, cost){
+
+  constructor(parent, state, action){
     this._parent = parent;
     this._currentState = state;
     this._action = action;
-    this._cost = cost;
   }
 
   makeMove(rowInput, currentState, turn, color): State{
@@ -29,6 +28,9 @@ export class Node {
   }
 
 
+  getCurrentState(): State {
+    return this._currentState;
+  }
   generateSuccesors(turn, color): Array<Node>{
     let children: Array<Node>;
     let row1: State = this.generateRow1(this._currentState, turn, color);
@@ -40,17 +42,26 @@ export class Node {
     let row7: State = this.generateRow7(this._currentState, turn, color);
     let row8: State = this.generateRow8(this._currentState, turn, color);
     let row9: State = this.generateRow9(this._currentState, turn, color);
-    children.push(new Node(this, row1, "row1", 1 ));
-    children.push(new Node(this, row2, "row2", 1 ));
-    children.push(new Node(this, row3, "row3", 1 ));
-    children.push(new Node(this, row4, "row4", 1 ));
-    children.push(new Node(this, row5, "row5", 1 ));
-    children.push(new Node(this, row6, "row6", 1 ));
-    children.push(new Node(this, row7, "row7", 1 ));
-    children.push(new Node(this, row8, "row8", 1 ));
-    children.push(new Node(this, row9, "row9", 1 ));
+    children.push(new Node(this, row1, "row1"));
+    children.push(new Node(this, row2, "row2"));
+    children.push(new Node(this, row3, "row3"));
+    children.push(new Node(this, row4, "row4"));
+    children.push(new Node(this, row5, "row5"));
+    children.push(new Node(this, row6, "row6"));
+    children.push(new Node(this, row7, "row7"));
+    children.push(new Node(this, row8, "row8"));
+    children.push(new Node(this, row9, "row9"));
 
     return children;
+  }
+
+
+  getPlayer1Score(): number{
+    return this._player1Score;
+  }
+
+  getPlayer2Score(): number{
+    return this._player2Score;
   }
 
   generateRow1(currentState, turn, color):State{

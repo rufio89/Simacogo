@@ -29,10 +29,26 @@
 
 #score{
   position:absolute;
-  top:0;
-  right:0;
-  border:solid 1px #27ae60;
+  top:10px;
+  right:10px;
+  border:solid 2px rgba(236, 240, 241, .5);
   width:300px;
   height: 100px;
+}
+
+.center-div{
   vertical-align: middle;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size:30px;
+}
+
+#player1-score{
+  color:#FFF;
+}
+
+#player2-score{
+  color:#000;
 }

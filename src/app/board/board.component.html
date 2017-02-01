@@ -2,7 +2,7 @@
   <h1 style="text-align: center;">SIMACOGO</h1>
 </div>
 <div id="container">
-  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="ui form">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value , $event)"  class="ui form">
     <div class="rowValue">
       <label for="rowInput">Row Value:</label>
       <input type="text" id="rowInput" placeholder="1" name="rowValue" ngModel>
@@ -24,6 +24,8 @@
 </div>
 
 <div id="score">
-  <div id="player1-score"><b>Player 1: </b>{{ player1Score}}</div>
-  <div id="player2-score"><b>Player 2: </b>{{ player2Score}}</div>
+  <div class="center-div">
+    <div id="player1-score"><b>MAX [O]: </b>{{ player1.getScore()}}</div>
+    <div id="player2-score"><b>MIN [X]: </b>{{ player2.getScore()}}</div>
+  </div>
 </div>
