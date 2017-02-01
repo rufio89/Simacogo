@@ -15,6 +15,8 @@ export class BoardComponent{
   player1: Player = new Player();
   player2: Player = new Player();
   player1Turn: boolean = true;
+  player1Score: Number=0;
+  player2Score: Number=0;
   constructor() {
     this.board = this.currentState.getCurrentState();
   }
@@ -26,10 +28,12 @@ export class BoardComponent{
     if(this.player1Turn) {
       this.currentState = this.player1.makeMove(form.rowValue, this.currentState, "O", "#FFF");
       this.player1Turn = !this.player1Turn;
+      this.player1Score = this.player1.getScore();
     }
     else{
       this.currentState = this.player2.makeMove(form.rowValue, this.currentState, "X", "#000");
       this.player1Turn = !this.player1Turn;
+      this.player2Score = this.player2.getScore();
     }
     console.dir(this.currentState);
     console.dir(this.board);

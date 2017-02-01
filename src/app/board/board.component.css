@@ -26,3 +26,13 @@
   color:#ecf0f1;
   opacity:.5;
 }
+
+#score{
+  position:absolute;
+  top:0;
+  right:0;
+  border:solid 1px #27ae60;
+  width:300px;
+  height: 100px;
+  vertical-align: middle;
+}
