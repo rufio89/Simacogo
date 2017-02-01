@@ -19,7 +19,7 @@ export class MiniMax {
 
     run():State{
       this._scores.push(new Node(null, this._currentState, "A"));
-      return this.minimax(this._depth, this._index, this._isMax, this._scores,"O", "#FFF");
+      return this.minimax(this._depth, this._index, this._isMax, this._scores,"X", "#000");
     }
 
     minimax(depth, index, isMax, scores, turn, color): State{
@@ -27,12 +27,12 @@ export class MiniMax {
       if(depth==0){
         return scores[index].getCurrentState();
       }
-      scores.push(current.generateSuccesors(turn, color));
+      scores.push(current.generateSuccesors(turn, color, current.getCurrentState()));
       if(isMax){
-        return this.max(this.minimax(depth-1, index*2, false, scores,  "O", "#FFF"), this.minimax(depth-1, index*2+1, false, scores,  "O", "#FFF"));
+        return this.max(this.minimax(depth-1, index*2, false, scores,  "X", "#000"), this.minimax(depth-1, index*2+1, false, scores,  "X", "#000"));
       }
       else{
-        return this.min(this.minimax(depth-1, index*2, true, scores,  "X", "#000"), this.minimax(depth-1, index*2+1, true, scores,  "X", "#000"));
+        return this.min(this.minimax(depth-1, index*2, true, scores,  "O", "#FFF"), this.minimax(depth-1, index*2+1, true, scores,  "O", "#FFF"));
       }
     }
 

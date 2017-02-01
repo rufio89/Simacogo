@@ -1,6 +1,6 @@
 import {Token} from "./token";
 export class State {
-   currentState: Array<Token> = new Array<Token>(82);
+   private _currentState: Array<Token> = new Array<Token>(82);
 
 
   constructor(){
@@ -8,18 +8,22 @@ export class State {
   };
 
   generateBoard(){
-    for(var i=0;i<this.currentState.length;i++){
-      this.currentState[i] = new Token();
+    for(var i=0;i<this._currentState.length;i++){
+      this._currentState[i] = new Token();
     }
   }
 
   getCurrentState(): Array<Token>{
-    return this.currentState;
+    return this._currentState;
   }
 
-  setCurrentState(i, newValue, newColor): void{
-    this.currentState[i].setValue(newValue);
-    this.currentState[i].setColor(newColor);
+  setCurrentState(currentState){
+    this._currentState = currentState.getCurrentState();
+  }
+
+  setCurrentStateValue(i, newValue, newColor): void{
+    this._currentState[i].setValue(newValue);
+    this._currentState[i].setColor(newColor);
   }
 
 }

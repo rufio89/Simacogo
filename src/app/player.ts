@@ -13,7 +13,7 @@ export class Player {
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
       currentElem = document.getElementById("square-" + i);
       if(!currentState[i] && currentElem.innerText == ""){
-        currentState.setCurrentState(i,turn, color);
+        currentState.setCurrentStateValue(i,turn, color);
         index = i;
         break;
       }
