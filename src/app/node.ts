@@ -1,4 +1,6 @@
 import {State} from "./state";
+import {Token} from "./token";
+import * as _ from "lodash";
 export class Node {
   private _parent: Node;
   private _currentState: State;
@@ -15,44 +17,65 @@ export class Node {
     this._action = action;
   }
 
-  makeMove(rowInput, currentState: State, turn, color): State{
+  makeMove(rowInput, currentState, turn, color): State{
     var currentElem;
-    console.dir(currentState);
-    console.log(typeof currentState);
+    var newState:State = _.cloneDeep(currentState);
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
+      console.log(typeof newState[i]);
       currentElem = document.getElementById("square-" + i);
-      if(!currentState[i] && currentElem.innerText == ""){
-        currentState.setCurrentStateValue(i,turn, color);
+      if(typeof newState[i] == "undefined" && currentElem.innerText == ""){
+        newState.setCurrentStateValue(i,turn, color);
         break;
       }
     }
-    return currentState;
+    return newState;
   }
 
 
   getCurrentState(): State {
     return this._currentState;
   }
-  generateSuccesors(turn, color, currentState): Array<Node>{
+  generateSuccessors(turn, color): Array<Node>{
     let children: Array<Node> = new Array<Node>();
-    let row1: State = this.generateRow1(currentState, turn, color);
-    let row2: State = this.generateRow2(currentState, turn, color);
-    let row3: State = this.generateRow3(currentState, turn, color);
-    let row4: State = this.generateRow4(currentState, turn, color);
-    let row5: State = this.generateRow5(currentState, turn, color);
-    let row6: State = this.generateRow6(currentState, turn, color);
-    let row7: State = this.generateRow7(currentState, turn, color);
-    let row8: State = this.generateRow8(currentState, turn, color);
-    let row9: State = this.generateRow9(currentState, turn, color);
+    let row1: State = this.generateRow(1, this._currentState, turn, color);
     children.push(new Node(this, row1, "row1"));
+    let row2: State = this.generateRow(2, this._currentState, turn, color);
     children.push(new Node(this, row2, "row2"));
+    let row3: State = this.generateRow(3, this._currentState, turn, color);
     children.push(new Node(this, row3, "row3"));
+    let row4: State = this.generateRow(4, this._currentState, turn, color);
     children.push(new Node(this, row4, "row4"));
+    let row5: State = this.generateRow(5, this._currentState, turn, color);
     children.push(new Node(this, row5, "row5"));
+    let row6: State = this.generateRow(6, this._currentState, turn, color);
     children.push(new Node(this, row6, "row6"));
+    let row7: State = this.generateRow(7, this._currentState, turn, color);
     children.push(new Node(this, row7, "row7"));
+    let row8: State = this.generateRow(8, this._currentState, turn, color);
     children.push(new Node(this, row8, "row8"));
-    children.push(new Node(this, row9, "row9"));
+    let row9: State = this.generateRow(9, this._currentState, turn, color);
+    children.push(new Node(this, row9, "row10"));
+
+    console.log(row1.getCurrentState()[64]);
+    console.log(row1.getCurrentState()[65]);
+    console.log(row1.getCurrentState()[66]);
+    console.log(row1.getCurrentState()[67]);
+    console.log(row1.getCurrentState()[68]);
+    console.log(row1.getCurrentState()[69]);
+    console.log(row1.getCurrentState()[70]);
+    console.log(row1.getCurrentState()[71]);
+    console.log(row1.getCurrentState()[72]);
+    console.log(row1.getCurrentState()[73]);
+    console.log(row1.getCurrentState()[74]);
+    console.log(row1.getCurrentState()[75]);
+    console.log(row1.getCurrentState()[76]);
+    console.log(row1.getCurrentState()[77]);
+    console.log(row1.getCurrentState()[78]);
+    console.log(row1.getCurrentState()[79]);
+    console.log(row1.getCurrentState()[80]);
+    console.log(row1.getCurrentState()[81]);
+    console.log(row1.getCurrentState()[82]);
+
 
     return children;
   }
@@ -66,41 +89,10 @@ export class Node {
     return this._player2Score;
   }
 
-  generateRow1(currentState, turn, color):State{
-    let newState:State = (this.makeMove(1,currentState, turn, color));
-    return newState;
+  generateRow(rowNum, currentState, turn, color):State{
+    return this.makeMove(rowNum,currentState, turn, color);
+
   }
-  generateRow2(currentState, turn, color):State{
-    let newState:State = (this.makeMove(2,currentState, turn, color));
-    return newState;
-  }
-  generateRow3(currentState, turn, color):State{
-    let newState:State = (this.makeMove(3,currentState, turn, color));
-    return newState;
-  }
-  generateRow4(currentState, turn, color):State{
-    let newState:State = (this.makeMove(4,currentState, turn, color));
-    return newState;
-  }
-  generateRow5(currentState, turn, color):State{
-    let newState:State = (this.makeMove(5,currentState, turn, color));
-    return newState;
-  }
-  generateRow6(currentState, turn, color):State{
-    let newState:State = (this.makeMove(6,currentState, turn, color));
-    return newState;
-  }
-  generateRow7(currentState, turn, color):State{
-    let newState:State = (this.makeMove(7,currentState, turn, color));
-    return newState;
-  }
-  generateRow8(currentState, turn, color):State{
-    let newState:State = (this.makeMove(8,currentState, turn, color));
-    return newState;
-  }
-  generateRow9(currentState, turn, color):State{
-    let newState:State = (this.makeMove(9,currentState, turn, color));
-    return newState;
-  }
+
 
 }

@@ -4,7 +4,7 @@ export class State {
 
 
   constructor(){
-    this.generateBoard();
+      this.generateBoard();
   };
 
   generateBoard(){
@@ -17,13 +17,26 @@ export class State {
     return this._currentState;
   }
 
-  setCurrentState(currentState){
-    this._currentState = currentState.getCurrentState();
+  setCurrentState(tokenArray){
+    this._currentState = tokenArray;
   }
 
   setCurrentStateValue(i, newValue, newColor): void{
     this._currentState[i].setValue(newValue);
     this._currentState[i].setColor(newColor);
   }
+
+  deepClone(oldArray: Array<Token>): Array<Token> {
+    let newArray: Array<Token> = new Array<Token>();
+    newArray = Object.assign({}, oldArray);
+
+    return newArray;
+  }
+
+
+
+
+
+
 
 }

@@ -27,7 +27,7 @@ export class MiniMax {
       if(depth==0){
         return scores[index].getCurrentState();
       }
-      scores.push(current.generateSuccesors(turn, color, current.getCurrentState()));
+      scores.push(current.generateSuccessors(turn, color));
       if(isMax){
         return this.max(this.minimax(depth-1, index*2, false, scores,  "X", "#000"), this.minimax(depth-1, index*2+1, false, scores,  "X", "#000"));
       }
