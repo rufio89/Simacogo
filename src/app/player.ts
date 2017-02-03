@@ -1,27 +1,77 @@
 import {State} from "./state";
+import * as _ from "lodash";
 export class Player {
+
   private _score: number =0;
+  private _gamePiece: string;
+  private _gamePieceColor:string;
+  private _isAI:boolean;
 
-
-  constructor(){
-
+  constructor(piece, color, isAI){
+    this._gamePiece = piece;
+    this._gamePieceColor = color;
+    this._isAI = isAI;
   }
 
-  makeMove(rowInput, currentState, turn, color): State{
+  getIsAI(): boolean {
+    return this._isAI;
+  }
+
+  setIsAI(value: boolean) {
+    this._isAI = value;
+  }
+  getGamePiece(): string {
+    return this._gamePiece;
+  }
+
+  setGamePiece(value: string) {
+    this._gamePiece = value;
+  }
+
+  getGamePieceColor(): string {
+    return this._gamePieceColor;
+  }
+
+  setGamePieceColor(value: string) {
+    this._gamePieceColor = value;
+  }
+
+
+  makeMove(rowInput, currentState): State{
     var currentElem;
-    let index: number = 0;
+    var index: Number = 0;
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
+      console.log(currentState.getCurrentState()[i].value == "");
       currentElem = document.getElementById("square-" + i);
-      if(!currentState[i] && currentElem.innerText == ""){
-        currentState.setCurrentStateValue(i,turn, color);
+
+      if(currentState.getCurrentState()[i].value == ""){
+        currentState.setCurrentStateValue(i, this._gamePiece, this._gamePieceColor);
         index = i;
         break;
       }
     }
-    console.log(turn);
-    this.checkNextTo(currentState,index, turn);
-    this.checkDiagonal(currentState,index, turn);
+    this.checkNextTo(currentState,index, this._gamePiece);
+    this.checkDiagonal(currentState,index, this._gamePiece);
     return currentState;
+  }
+
+  makeMoveAI(rowInput, currentState): State{
+    var currentElem;
+    var index: Number = 0;
+    var newState:State = _.cloneDeep(currentState);
+    for(var i = 72 + parseInt(rowInput);i >0;i-=9){
+      console.log(newState.getCurrentState()[i].value == "");
+      currentElem = document.getElementById("square-" + i);
+
+      if(newState.getCurrentState()[i].value == ""){
+        newState.setCurrentStateValue(i, this._gamePiece, this._gamePieceColor);
+        index = i;
+        break;
+      }
+    }
+    this.checkNextTo(currentState,index, this._gamePiece);
+    this.checkDiagonal(currentState,index, this._gamePiece);
+    return newState;
   }
 
   checkNextTo(currentState, index, turn){

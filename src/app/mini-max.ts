@@ -1,6 +1,7 @@
 import {State} from "./state";
 import {Node} from "./node";
 import {Queue}  from "./queue"
+import {Player} from "./player";
 export class MiniMax {
     private _depth: number;
     private _index: number;
@@ -17,25 +18,31 @@ export class MiniMax {
 
     }
 
-    run():Node{
+    run(player1, player2):Node{
+      let p1: Player= player1;
+      let p2: Player= player2;
+      let players: Array<Player>= new Array<Player>(2);
+      players[0] = p1;
+      players[1] = p2;
+
       this._scores.push(new Node(null, this._currentState, "A"));
-      return this.minimax(this._depth, this._index, this._isMax, this._scores,"X", "#000", this._scores);
+      return this.minimax(this._depth, this._index, this._isMax, this._scores, this._scores, players, p2);
     }
 
-    minimax(depth, index, isMax, scores, turn, color, current): Node{
+    minimax(depth, index, isMax, scores, current, players, player): Node{
       current = scores.pop();
       if(depth==0){
         return current;
       }
-      let successors: Array<Node> = current.generateSuccessors(turn, color);
+      let successors: Array<Node> = current.generateSuccessors(player);
       for(var i in successors){
         scores.push(successors[i]);
       }
       if(isMax){
-        return this.max(this.minimax(depth-1, index*2, !isMax, scores,  "0", "#FFF", current), this.minimax(depth-1, index*2+1, !isMax, scores,  "O", "#FFF", current));
+        return this.max(this.minimax(depth-1, index*2, !isMax, scores, current, players, players[0]), this.minimax(depth-1, index*2+1, !isMax, scores, current,  players, players[0]));
       }
       else{
-        return this.min(this.minimax(depth-1, index*2, !isMax, scores,  "X", "#000", current), this.minimax(depth-1, index*2+1, !isMax, scores,  "X", "#000", current));
+        return this.min(this.minimax(depth-1, index*2, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, index*2+1, !isMax, scores, current, players, players[1]));
       }
     }
 

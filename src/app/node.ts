@@ -17,20 +17,6 @@ export class Node {
     this._action = action;
   }
 
-  makeMove(rowInput, currentState, turn, color): State{
-    var currentElem;
-    var newState:State = _.cloneDeep(currentState);
-    for(var i = 72 + parseInt(rowInput);i >0;i-=9){
-      console.log(newState.getCurrentState()[i].value == "");
-      currentElem = document.getElementById("square-" + i);
-
-      if(newState.getCurrentState()[i].value == ""){
-        newState.setCurrentStateValue(i,turn, color);
-        break;
-      }
-    }
-    return newState;
-  }
 
   getState(): State{
     return this._currentState;
@@ -39,25 +25,25 @@ export class Node {
   getCurrentState(): Array<Token> {
     return this._currentState.getCurrentState();
   }
-  generateSuccessors(turn, color): Array<Node>{
+  generateSuccessors(player): Array<Node>{
     let children: Array<Node> = new Array<Node>();
-    let row1: State = this.generateRow(1, this._currentState, turn, color);
+    let row1: State = this.generateRow(1, this._currentState, player);
     children.push(new Node(this, row1, "row1"));
-    let row2: State = this.generateRow(2, this._currentState, turn, color);
+    let row2: State = this.generateRow(2, this._currentState,  player);
     children.push(new Node(this, row2, "row2"));
-    let row3: State = this.generateRow(3, this._currentState, turn, color);
+    let row3: State = this.generateRow(3, this._currentState, player);
     children.push(new Node(this, row3, "row3"));
-    let row4: State = this.generateRow(4, this._currentState, turn, color);
+    let row4: State = this.generateRow(4, this._currentState, player);
     children.push(new Node(this, row4, "row4"));
-    let row5: State = this.generateRow(5, this._currentState, turn, color);
+    let row5: State = this.generateRow(5, this._currentState, player);
     children.push(new Node(this, row5, "row5"));
-    let row6: State = this.generateRow(6, this._currentState, turn, color);
+    let row6: State = this.generateRow(6, this._currentState, player);
     children.push(new Node(this, row6, "row6"));
-    let row7: State = this.generateRow(7, this._currentState, turn, color);
+    let row7: State = this.generateRow(7, this._currentState, player);
     children.push(new Node(this, row7, "row7"));
-    let row8: State = this.generateRow(8, this._currentState, turn, color);
+    let row8: State = this.generateRow(8, this._currentState, player);
     children.push(new Node(this, row8, "row8"));
-    let row9: State = this.generateRow(9, this._currentState, turn, color);
+    let row9: State = this.generateRow(9, this._currentState, player);
     children.push(new Node(this, row9, "row9"));
 
     this.printBoard(children);
@@ -82,10 +68,11 @@ export class Node {
     return this._player2Score;
   }
 
-  generateRow(rowNum, currentState, turn, color):State{
-    return this.makeMove(rowNum,currentState, turn, color);
+  generateRow(rowNum, currentState, player):State{
+    return player.makeMoveAI(rowNum,currentState);
 
   }
+
 
 
 }

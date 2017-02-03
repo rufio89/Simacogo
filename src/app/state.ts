@@ -30,12 +30,7 @@ export class State {
     this._currentState[i].setColor(newColor);
   }
 
-  deepClone(oldArray: Array<Token>): Array<Token> {
-    let newArray: Array<Token> = new Array<Token>();
-    newArray = Object.assign({}, oldArray);
 
-    return newArray;
-  }
 
 
 
