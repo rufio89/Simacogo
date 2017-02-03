@@ -1,9 +1,5 @@
 export class Queue<T> {
-
-  _store: T[] = [];
-
-  custructor(){}
-
+  _store: Array<T> = new Array<T>();
   push(val: T) {
     this._store.push(val);
   }

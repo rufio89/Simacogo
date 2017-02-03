@@ -21,9 +21,10 @@ export class Node {
     var currentElem;
     var newState:State = _.cloneDeep(currentState);
     for(var i = 72 + parseInt(rowInput);i >0;i-=9){
-      console.log(typeof newState[i]);
+      console.log(newState.getCurrentState()[i].value == "");
       currentElem = document.getElementById("square-" + i);
-      if(typeof newState[i] == "undefined" && currentElem.innerText == ""){
+
+      if(newState.getCurrentState()[i].value == ""){
         newState.setCurrentStateValue(i,turn, color);
         break;
       }
@@ -31,9 +32,12 @@ export class Node {
     return newState;
   }
 
-
-  getCurrentState(): State {
+  getState(): State{
     return this._currentState;
+  }
+
+  getCurrentState(): Array<Token> {
+    return this._currentState.getCurrentState();
   }
   generateSuccessors(turn, color): Array<Node>{
     let children: Array<Node> = new Array<Node>();
@@ -54,30 +58,19 @@ export class Node {
     let row8: State = this.generateRow(8, this._currentState, turn, color);
     children.push(new Node(this, row8, "row8"));
     let row9: State = this.generateRow(9, this._currentState, turn, color);
-    children.push(new Node(this, row9, "row10"));
+    children.push(new Node(this, row9, "row9"));
 
-    console.log(row1.getCurrentState()[64]);
-    console.log(row1.getCurrentState()[65]);
-    console.log(row1.getCurrentState()[66]);
-    console.log(row1.getCurrentState()[67]);
-    console.log(row1.getCurrentState()[68]);
-    console.log(row1.getCurrentState()[69]);
-    console.log(row1.getCurrentState()[70]);
-    console.log(row1.getCurrentState()[71]);
-    console.log(row1.getCurrentState()[72]);
-    console.log(row1.getCurrentState()[73]);
-    console.log(row1.getCurrentState()[74]);
-    console.log(row1.getCurrentState()[75]);
-    console.log(row1.getCurrentState()[76]);
-    console.log(row1.getCurrentState()[77]);
-    console.log(row1.getCurrentState()[78]);
-    console.log(row1.getCurrentState()[79]);
-    console.log(row1.getCurrentState()[80]);
-    console.log(row1.getCurrentState()[81]);
-    console.log(row1.getCurrentState()[82]);
-
+    this.printBoard(children);
 
     return children;
+  }
+
+  printBoard(children){
+    for(var i=0; i<9;i++){
+      for(var j=0;j<81;j+=9)
+      console.log("[" + children[i].getCurrentState()[j+1].value + "]" + "[" + children[i].getCurrentState()[j+2].value + "]" + "[" + children[i].getCurrentState()[j+3].value + "]" + "[" + children[i].getCurrentState()[j+4].value + "]" + "[" + children[i].getCurrentState()[j+5].value + "]" + "[" + children[i].getCurrentState()[j+6].value + "]" + "[" + children[i].getCurrentState()[j+7].value + "]" + "[" + children[i].getCurrentState()[j+8].value + "]"  + "[" + children[i].getCurrentState()[j+9].value + "]" );
+    }
+
   }
 
 

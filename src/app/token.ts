@@ -1,27 +1,28 @@
 export class Token {
-  private _value:string = "";
-  private _color:string = "";
+  value:string = "";
+  color:string = "";
 
   constructor(){
-
+    this.color = "";
+    this.value = "";
   }
 
 
 
   public getValue(): string {
-    return this._value;
+    return this.value;
   }
 
   public setValue(value: string) {
-    this._value = value;
+    this.value = value;
   }
 
   public getColor(): string {
-    return this._color;
+    return this.color;
   }
 
   public setColor(value: string) {
-    this._color = value;
+    this.color = value;
   }
 
 

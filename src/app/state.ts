@@ -21,6 +21,10 @@ export class State {
     this._currentState = tokenArray;
   }
 
+  getCurrentStateValue(i): string{
+    return this._currentState[i].getValue();
+  }
+
   setCurrentStateValue(i, newValue, newColor): void{
     this._currentState[i].setValue(newValue);
     this._currentState[i].setColor(newColor);
