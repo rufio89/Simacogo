@@ -59,15 +59,6 @@ export class Node {
 
   }
 
-
-  getPlayer1Score(): number{
-    return this._player1Score;
-  }
-
-  getPlayer2Score(): number{
-    return this._player2Score;
-  }
-
   generateRow(rowNum, currentState, player):State{
     return player.makeMoveAI(rowNum,currentState);
 

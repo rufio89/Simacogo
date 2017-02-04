@@ -32,17 +32,17 @@ export class MiniMax {
     minimax(depth, index, isMax, scores, current, players, player): Node{
       current = scores.pop();
       if(depth==0){
-        return current;
+        return scores.get(index);
       }
       let successors: Array<Node> = current.generateSuccessors(player);
       for(var i in successors){
         scores.push(successors[i]);
       }
       if(isMax){
-        return this.max(this.minimax(depth-1, index*2, !isMax, scores, current, players, players[0]), this.minimax(depth-1, index*2+1, !isMax, scores, current,  players, players[0]));
+        return this.max(this.minimax(depth-1, index*9, !isMax, scores, current, players, players[0]), this.minimax(depth-1, index*9+1, !isMax, scores, current,  players, players[0]));
       }
       else{
-        return this.min(this.minimax(depth-1, index*2, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, index*2+1, !isMax, scores, current, players, players[1]));
+        return this.min(this.minimax(depth-1, index*9, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, index*9+1, !isMax, scores, current, players, players[1]));
       }
     }
 
@@ -66,10 +66,12 @@ export class MiniMax {
   }
 
     utility(node1) : number{
-      if(node1.getPlayer1Score() > node1.getPlayer2Score()){
+      let player1Score: number = node1.getPlayer1Score();
+      let player2Score : number = node1.getPlayer2Score();
+      if(player1Score > player2Score){
         return 1;
       }
-      else if(node1.getPlayer2Score() > node1.getPlayer1Score()){
+      else if(player2Score > player1Score){
         return -1;
       }
       else{

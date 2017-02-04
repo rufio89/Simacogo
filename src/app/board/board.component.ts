@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 import {State} from "../state";
 import {Token} from "../token";
 import {Player} from "../player";
@@ -19,20 +19,23 @@ export class BoardComponent{
   player1Score: number=0;
   player2Score: number=0;
 
-  constructor() {
+  constructor(private _ngZone: NgZone) {
     this.board = this.currentState.getCurrentState();
   }
 
 
   roboTurn(){
     // Return state, flip player switch, and update the score for the UI.
-    if(!this.player1Turn) {
+    if (!this.player1Turn) {
       let m: MiniMax = new MiniMax(3, 0, true, this.currentState);
-      this.currentState = m.run(this.player1, this.player2).getState();
+      let s: State = m.run(this.player1, this.player2).getState();
+      this.board = s.getCurrentState();
       this.player1Turn = !this.player1Turn;
       this.player2Score = this.player2.getScore();
+
     }
   }
+
 
   onSubmit(form: any, event:Event): void{
     console.log(form);
@@ -40,6 +43,7 @@ export class BoardComponent{
       this.currentState = this.player1.makeMove(form.rowValue, this.currentState);
       this.player1Turn = !this.player1Turn;
       this.player1Score = this.player1.getScore();
+      this.roboTurn();
 
     }
 
@@ -48,9 +52,8 @@ export class BoardComponent{
     console.dir(event);
   }
 
-  ngAfterViewChecked() {
-   this.roboTurn();
-  }
+
+
 
 
 }
