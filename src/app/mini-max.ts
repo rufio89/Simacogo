@@ -58,11 +58,11 @@ export class MiniMax {
 
 
     max(node1, node2, node3, node4, node5): Node{
-      let n1 = {value: this.utility(node1), name: "n1"};
-      let n2 = {value: this.utility(node2), name: "n2"};
-      let n3 = {value: this.utility(node3), name: "n3"};
-      let n4 = {value: this.utility(node4), name: "n4"};
-      let n5 = {value: this.utility(node5), name: "n5"};
+      let n1 = {value: this.evaluate(node1), name: "n1"};
+      let n2 = {value: this.evaluate(node2), name: "n2"};
+      let n3 = {value: this.evaluate(node3), name: "n3"};
+      let n4 = {value: this.evaluate(node4), name: "n4"};
+      let n5 = {value: this.evaluate(node5), name: "n5"};
       let nodeArray: Array<{value:number, name:string}> = new Array<{value:number, name:string}>(5);
       nodeArray.push({value:n1.value, name:n1.name});
       nodeArray.push({value:n2.value, name:n2.name});
@@ -80,11 +80,11 @@ export class MiniMax {
     }
 
   min(node1, node2, node3, node4, node5): Node{
-    let n1 = {value: this.utility(node1), name: "n1"};
-    let n2 = {value: this.utility(node2), name: "n2"};
-    let n3 = {value: this.utility(node3), name: "n3"};
-    let n4 = {value: this.utility(node4), name: "n4"};
-    let n5 = {value: this.utility(node5), name: "n5"};
+    let n1 = {value: this.evaluate(node1), name: "n1"};
+    let n2 = {value: this.evaluate(node2), name: "n2"};
+    let n3 = {value: this.evaluate(node3), name: "n3"};
+    let n4 = {value: this.evaluate(node4), name: "n4"};
+    let n5 = {value: this.evaluate(node5), name: "n5"};
     let nodeArray: Array<{value:number, name:string}> = new Array<{value:number, name:string}>(5);
     nodeArray.push({value:n1.value, name:n1.name});
     nodeArray.push({value:n2.value, name:n2.name});
@@ -100,18 +100,10 @@ export class MiniMax {
     if(max.name =="n5") return node5;
   }
 
-    utility(node1) : number{
+    evaluate(node1) : number{
       let player1Score: number = node1.getPlayer1Score();
       let player2Score : number = node1.getPlayer2Score();
-      if(player2Score > player1Score){
-        return 1;
-      }
-      else if(player1Score > player2Score){
-        return -1;
-      }
-      else{
-        return 0;
-      }
+      return player2Score - player1Score;
     }
 
 

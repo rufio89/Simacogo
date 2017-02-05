@@ -33,7 +33,7 @@ export class BoardComponent{
       this.currentState = s;
       this.board = s.getCurrentState();
       this.player1Turn = !this.player1Turn;
-      this.player2Score = this.player2.getScore();
+      this.player2Score = s.getPlayer2Score();
 
     }
   }
@@ -44,7 +44,8 @@ export class BoardComponent{
     if(this.player1Turn) {
       this.currentState = this.player1.makeMove(form.rowValue, this.currentState);
       this.player1Turn = !this.player1Turn;
-      this.player1Score = this.player1.getScore();
+      this.player1Score +=this.player1.getScore();
+      this.delay(300);
       this.roboTurn();
 
     }
@@ -52,6 +53,10 @@ export class BoardComponent{
     console.dir(this.currentState);
     console.dir(this.board);
     console.dir(event);
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 

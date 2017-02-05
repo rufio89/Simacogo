@@ -172,10 +172,10 @@ export class Player {
 
   checkDiagonal(currentState, index, turn) {
     let boardSize = currentState.getBoardSize();
-    var upLeft = parseInt(index) - (9 + 1);
-    var upRight = parseInt(index) - (9 + 1);
-    var downLeft = parseInt(index) + (9 - 1);
-    var downRight = parseInt(index) + (9 + 1);
+    var upLeft = parseInt(index) - (boardSize + 1);
+    var upRight = parseInt(index) - (boardSize + 1);
+    var downLeft = parseInt(index) + (boardSize - 1);
+    var downRight = parseInt(index) + (boardSize + 1);
 
 
 
