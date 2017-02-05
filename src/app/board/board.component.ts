@@ -3,6 +3,7 @@ import {State} from "../state";
 import {Token} from "../token";
 import {Player} from "../player";
 import {MiniMax} from "../mini-max";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-board',
@@ -10,10 +11,10 @@ import {MiniMax} from "../mini-max";
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent{
-  boardSize: number = 5;
+  boardSize: number = 9;
   currentState:State = new State();
   board: Array<Token>;
-  rows:Array<number> = [1,2,3,4,5] ;
+  rows:Array<number> = [1,2,3,4,5,6,7,8,9] ;
   player1: Player = new Player("O", "#FFF", false);
   player2: Player = new Player("X", "#000", true);
   player1Turn: boolean = true;
@@ -23,6 +24,7 @@ export class BoardComponent{
   constructor(private _ngZone: NgZone) {
     this.board = this.currentState.getCurrentState();
   }
+
 
 
   roboTurn(){
@@ -45,9 +47,7 @@ export class BoardComponent{
       this.currentState = this.player1.makeMove(form.rowValue, this.currentState);
       this.player1Turn = !this.player1Turn;
       this.player1Score +=this.player1.getScore();
-      this.delay(300);
-      this.roboTurn();
-
+      setTimeout(()=> { this.roboTurn();});
     }
 
     console.dir(this.currentState);

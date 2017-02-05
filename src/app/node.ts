@@ -54,14 +54,14 @@ export class Node {
     children.push(new Node(this, row4, "row4", row4.getPlayer1Score(), row4.getPlayer2Score()));
     let row5: State = this.generateRow(5, this._currentState, player);
     children.push(new Node(this, row5, "row5", row5.getPlayer1Score(), row5.getPlayer2Score()));
-    // let row6: State = this.generateRow(6, this._currentState, player);
-    // children.push(new Node(this, row6, "row6", row6.getPlayer1Score(), row6.getPlayer2Score()));
-    // let row7: State = this.generateRow(7, this._currentState, player);
-    // children.push(new Node(this, row7, "row7", row7.getPlayer1Score(), row7.getPlayer2Score()));
-    // let row8: State = this.generateRow(8, this._currentState, player);
-    // children.push(new Node(this, row8, "row8", row8.getPlayer1Score(), row8.getPlayer2Score()));
-    // let row9: State = this.generateRow(9, this._currentState, player);
-    // children.push(new Node(this, row9, "row9", row9.getPlayer1Score(), row9.getPlayer2Score()));
+    let row6: State = this.generateRow(6, this._currentState, player);
+    children.push(new Node(this, row6, "row6", row6.getPlayer1Score(), row6.getPlayer2Score()));
+    let row7: State = this.generateRow(7, this._currentState, player);
+    children.push(new Node(this, row7, "row7", row7.getPlayer1Score(), row7.getPlayer2Score()));
+    let row8: State = this.generateRow(8, this._currentState, player);
+    children.push(new Node(this, row8, "row8", row8.getPlayer1Score(), row8.getPlayer2Score()));
+    let row9: State = this.generateRow(9, this._currentState, player);
+    children.push(new Node(this, row9, "row9", row9.getPlayer1Score(), row9.getPlayer2Score()));
 
     this.printBoard(children);
 
@@ -72,8 +72,7 @@ export class Node {
     let boardSize: number = this._currentState.getBoardSize();
     for(var i=0; i< boardSize;i++){
       for(var j=0;j<(boardSize*boardSize);j+=boardSize)
-      //+ "[" + children[i].getCurrentState()[j+5].value + "]" + "[" + children[i].getCurrentState()[j+6].value + "]" + "[" + children[i].getCurrentState()[j+7].value + "]"  + "[" + children[i].getCurrentState()[j+8].value + "]"
-      console.log("[" + children[i].getCurrentState()[j].value + "]" + "[" + children[i].getCurrentState()[j+1].value + "]" + "[" + children[i].getCurrentState()[j+2].value + "]" + "[" + children[i].getCurrentState()[j+3].value + "]" + "[" + children[i].getCurrentState()[j+4].value + "]");
+      console.log("[" + children[i].getCurrentState()[j].value + "]" + "[" + children[i].getCurrentState()[j+1].value + "]" + "[" + children[i].getCurrentState()[j+2].value + "]" + "[" + children[i].getCurrentState()[j+3].value + "]" + "[" + children[i].getCurrentState()[j+4].value + "]" + "[" + children[i].getCurrentState()[j+5].value + "]" + "[" + children[i].getCurrentState()[j+6].value + "]" + "[" + children[i].getCurrentState()[j+7].value + "]"  + "[" + children[i].getCurrentState()[j+8].value + "]");
     }
   }
 

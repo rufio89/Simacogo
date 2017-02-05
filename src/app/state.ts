@@ -1,7 +1,7 @@
 import {Token} from "./token";
 export class State {
-   private _boardSize: number = 5;
-   private _currentState: Array<Token> = new Array<Token>(25);
+   private _boardSize: number = 9;
+   private _currentState: Array<Token> = new Array<Token>(81);
    private _player1Score: number;
    private _player2Score: number;
 
@@ -17,6 +17,8 @@ export class State {
       this._currentState[i] = new Token();
     }
   }
+
+
 
   getBoardSize(): number{
     return this._boardSize;
