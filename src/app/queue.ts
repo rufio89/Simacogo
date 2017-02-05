@@ -11,4 +11,8 @@ export class Queue<T> {
     return this._store.shift();
   }
 
+  length(): number{
+    return this._store.length;
+  }
+
 }

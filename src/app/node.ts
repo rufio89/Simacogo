@@ -19,6 +19,14 @@ export class Node {
     this._player2Score = player2Score;
   }
 
+  getParent(): Node {
+    return this._parent;
+  }
+
+  getAction(): string{
+    return this._action;
+  }
+
 
   getPlayer1Score(): number {
     return this._player1Score;

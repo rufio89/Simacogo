@@ -25,11 +25,17 @@ export class MiniMax {
       players[0] = p1;
       players[1] = p2;
 
-      this._scores.push(new Node(null, this._currentState, "A", 0, 0));
-      return this.minimax(this._depth,  this._isMax, this._scores, this._scores, players, p2);
+      this._scores.push(new Node(null, this._currentState, "ROOT", 0, 0));
+      let current: Node = this.minimax(this._depth,  this._isMax, this._scores, this._scores, players, p2);
+      while(current.getParent().getAction()!= "ROOT"){
+        current = current.getParent();
+      }
+
+      return current;
     }
 
     minimax(depth, isMax, scores, current, players, player): Node{
+
       current = scores.pop();
       if(depth==0){
         return current;
@@ -39,12 +45,15 @@ export class MiniMax {
       for(var i in successors){
         scores.push(successors[i]);
       }
+      console.log(scores.length());
+
       if(isMax){
         return this.max(this.minimax(depth-1, !isMax, scores, current, players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]) );
       }
       else{
         return this.min(this.minimax(depth-1, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]));
       }
+
     }
 
 
@@ -86,9 +95,9 @@ export class MiniMax {
     let max = nodeArray[0];
     if(max.name =="n1") return node1;
     if(max.name =="n2") return node2;
-    if(max.name =="n1") return node3;
-    if(max.name =="n1") return node4;
-    if(max.name =="n1") return node5;
+    if(max.name =="n3") return node3;
+    if(max.name =="n4") return node4;
+    if(max.name =="n5") return node5;
   }
 
     utility(node1) : number{

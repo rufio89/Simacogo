@@ -30,6 +30,7 @@ export class BoardComponent{
     if (!this.player1Turn) {
       let m: MiniMax = new MiniMax(3, 0, true, this.currentState);
       let s: State = m.run(this.player1, this.player2).getState();
+      this.currentState = s;
       this.board = s.getCurrentState();
       this.player1Turn = !this.player1Turn;
       this.player2Score = this.player2.getScore();
