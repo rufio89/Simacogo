@@ -63,7 +63,7 @@ export class Node {
     let row9: State = this.generateRow(9, this._currentState, player);
     children.push(new Node(this, row9, "row9", row9.getPlayer1Score(), row9.getPlayer2Score()));
 
-    this.printBoard(children);
+    //this.printBoard(children);
 
     return children;
   }

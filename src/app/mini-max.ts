@@ -45,7 +45,7 @@ export class MiniMax {
       for(var i in successors){
         scores.push(successors[i]);
       }
-      console.log(scores.length());
+      //console.log(scores.length());
 
       if(isMax){
         return this.max(this.minimax(depth-1, !isMax, scores, current, players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]) );

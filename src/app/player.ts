@@ -42,7 +42,6 @@ export class Player {
     var currentElem;
     var index: Number = 0;
     for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >0;i-=boardSize){
-      console.log(currentState.getCurrentState()[i].value == "");
       currentElem = document.getElementById("square-" + i);
 
       if(currentState.getCurrentState()[i].value == ""){
@@ -62,7 +61,6 @@ export class Player {
     var index: Number = 0;
     var newState:State = _.cloneDeep(currentState);
     for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >0;i-=boardSize){
-      console.log(newState.getCurrentState()[i].value == "");
       currentElem = document.getElementById("square-" + i);
 
       if(newState.getCurrentState()[i].value == ""){

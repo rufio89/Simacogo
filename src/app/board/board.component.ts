@@ -20,9 +20,11 @@ export class BoardComponent{
   player1Turn: boolean = true;
   player1Score: number=0;
   player2Score: number=0;
+  ply: number =0;
 
   constructor(private _ngZone: NgZone) {
     this.board = this.currentState.getCurrentState();
+    this.getPly();
   }
 
 
@@ -30,7 +32,7 @@ export class BoardComponent{
   roboTurn(){
     // Return state, flip player switch, and update the score for the UI.
     if (!this.player1Turn) {
-      let m: MiniMax = new MiniMax(3, 0, true, this.currentState);
+      let m: MiniMax = new MiniMax(this.ply, 0, true, this.currentState);
       let s: State = m.run(this.player1, this.player2).getState();
       this.currentState = s;
       this.board = s.getCurrentState();
@@ -50,14 +52,18 @@ export class BoardComponent{
       setTimeout(()=> { this.roboTurn();});
     }
 
-    console.dir(this.currentState);
-    console.dir(this.board);
-    console.dir(event);
+    //console.dir(this.currentState);
+    //console.dir(this.board);
+    //console.dir(event);
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  getPly() {
+  var ply = prompt("Please enter the ply", "3");
+
+  if (ply != null) {
+    this.ply = parseInt(ply);
   }
+}
 
 
 
