@@ -14,10 +14,13 @@
     <div class="row">{{r}}</div>
   </div>
   <div *ngFor="let b of board; let i = index">
-    <div class="square" id="square-{{i}}"*ngIf="i%9==0 && i!=0">
+    <div class="square" id="square-{{i}}"*ngIf="i==0">
       <div [style.color]="b.getColor()">{{b.getValue()}}</div>
     </div>
-    <div   class="square" id="square-{{i}}" *ngIf="i%9!=0">
+    <div class="square" id="square-{{i}}"*ngIf="i%(boardSize-1)==0 && i!=0">
+      <div [style.color]="b.getColor()">{{b.getValue()}}</div>
+    </div>
+    <div   class="square" id="square-{{i}}" *ngIf="i%(boardSize-1)!=0">
       <div [style.color]="b.getColor()">{{b.getValue()}}</div>
     </div>
   </div>

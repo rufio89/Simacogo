@@ -25,59 +25,88 @@ export class MiniMax {
       players[0] = p1;
       players[1] = p2;
 
-      this._scores.push(new Node(null, this._currentState, "A"));
-      return this.minimax(this._depth, this._index, this._isMax, this._scores, this._scores, players, p2);
+      this._scores.push(new Node(null, this._currentState, "A", 0, 0));
+      return this.minimax(this._depth,  this._isMax, this._scores, this._scores, players, p2);
     }
 
-    minimax(depth, index, isMax, scores, current, players, player): Node{
+    minimax(depth, isMax, scores, current, players, player): Node{
       current = scores.pop();
       if(depth==0){
-        return scores.get(index);
+        return current;
       }
+
       let successors: Array<Node> = current.generateSuccessors(player);
       for(var i in successors){
         scores.push(successors[i]);
       }
       if(isMax){
-        return this.max(this.minimax(depth-1, index*9, !isMax, scores, current, players, players[0]), this.minimax(depth-1, index*9+1, !isMax, scores, current,  players, players[0]));
+        return this.max(this.minimax(depth-1, !isMax, scores, current, players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]), this.minimax(depth-1,  !isMax, scores, current,  players, players[0]) );
       }
       else{
-        return this.min(this.minimax(depth-1, index*9, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, index*9+1, !isMax, scores, current, players, players[1]));
+        return this.min(this.minimax(depth-1, !isMax, scores,  current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]), this.minimax(depth-1, !isMax, scores, current, players, players[1]));
       }
     }
 
 
-    max(node1, node2): Node{
-      if(this.utility(node1) > this.utility(node2)){
-        return node1;
-      }
-      else{
-        return node2;
-      }
+    max(node1, node2, node3, node4, node5): Node{
+      let n1 = {value: this.utility(node1), name: "n1"};
+      let n2 = {value: this.utility(node2), name: "n2"};
+      let n3 = {value: this.utility(node3), name: "n3"};
+      let n4 = {value: this.utility(node4), name: "n4"};
+      let n5 = {value: this.utility(node5), name: "n5"};
+      let nodeArray: Array<{value:number, name:string}> = new Array<{value:number, name:string}>(5);
+      nodeArray.push({value:n1.value, name:n1.name});
+      nodeArray.push({value:n2.value, name:n2.name});
+      nodeArray.push({value:n3.value, name:n3.name});
+      nodeArray.push({value:n4.value, name:n4.name});
+      nodeArray.push({value:n5.value, name:n5.name});
+      nodeArray.sort(function(a,b){ return a.value-b.value});
+      let max = nodeArray[4];
+      if(max.name =="n1") return node1;
+      if(max.name =="n2") return node2;
+      if(max.name =="n3") return node3;
+      if(max.name =="n4") return node4;
+      if(max.name =="n5") return node5;
+
     }
 
-  min(node1, node2): Node{
-    if(this.utility(node1) < this.utility(node2)){
-      return node1;
-    }
-    else{
-      return node2;
-    }
+  min(node1, node2, node3, node4, node5): Node{
+    let n1 = {value: this.utility(node1), name: "n1"};
+    let n2 = {value: this.utility(node2), name: "n2"};
+    let n3 = {value: this.utility(node3), name: "n3"};
+    let n4 = {value: this.utility(node4), name: "n4"};
+    let n5 = {value: this.utility(node5), name: "n5"};
+    let nodeArray: Array<{value:number, name:string}> = new Array<{value:number, name:string}>(5);
+    nodeArray.push({value:n1.value, name:n1.name});
+    nodeArray.push({value:n2.value, name:n2.name});
+    nodeArray.push({value:n3.value, name:n3.name});
+    nodeArray.push({value:n4.value, name:n4.name});
+    nodeArray.push({value:n5.value, name:n5.name});
+    nodeArray.sort(function(a,b){ return a.value-b.value});
+    let max = nodeArray[0];
+    if(max.name =="n1") return node1;
+    if(max.name =="n2") return node2;
+    if(max.name =="n1") return node3;
+    if(max.name =="n1") return node4;
+    if(max.name =="n1") return node5;
   }
 
     utility(node1) : number{
       let player1Score: number = node1.getPlayer1Score();
       let player2Score : number = node1.getPlayer2Score();
-      if(player1Score > player2Score){
+      if(player2Score > player1Score){
         return 1;
       }
-      else if(player2Score > player1Score){
+      else if(player1Score > player2Score){
         return -1;
       }
       else{
         return 0;
       }
     }
+
+
+
 
 
 }

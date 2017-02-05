@@ -1,16 +1,25 @@
 import {Token} from "./token";
 export class State {
-   private _currentState: Array<Token> = new Array<Token>(82);
+   private _boardSize: number = 5;
+   private _currentState: Array<Token> = new Array<Token>(25);
+   private _player1Score: number;
+   private _player2Score: number;
 
 
   constructor(){
       this.generateBoard();
+      this._player1Score = 0;
+      this._player2Score = 0;
   };
 
   generateBoard(){
     for(var i=0;i<this._currentState.length;i++){
       this._currentState[i] = new Token();
     }
+  }
+
+  getBoardSize(): number{
+    return this._boardSize;
   }
 
   getCurrentState(): Array<Token>{
@@ -30,6 +39,29 @@ export class State {
     this._currentState[i].setColor(newColor);
   }
 
+  getPlayer1Score(): number {
+    return this._player1Score;
+  }
+
+  setPlayer1Score(value: number) {
+    this._player1Score = value;
+  }
+
+  getPlayer2Score(): number {
+    return this._player2Score;
+  }
+
+  setPlayer2Score(value: number) {
+    this._player2Score = value;
+  }
+
+  addPlayer1Score(value:number){
+    this._player1Score += value;
+  }
+
+  addPlayer2Score(value:number){
+    this._player2Score += value;
+  }
 
 
 

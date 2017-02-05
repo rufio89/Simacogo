@@ -1,7 +1,7 @@
 export class Queue<T> {
   _store: Array<T> = new Array<T>();
   push(val: T) {
-    this._store.push(val);
+    this._store.unshift(val);
   }
   get(index){
     return this._store[index];
