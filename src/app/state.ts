@@ -1,7 +1,7 @@
 import {Token} from "./token";
 export class State {
-   private _boardSize: number = 9;
-   private _currentState: Array<Token> = new Array<Token>(81);
+   private _boardSize: number = 4;
+   private _currentState: Array<Token> = new Array<Token>(16);
    private _player1Score: number;
    private _player2Score: number;
 
@@ -16,6 +16,13 @@ export class State {
     for(var i=0;i<this._currentState.length;i++){
       this._currentState[i] = new Token();
     }
+  }
+
+  isTerminal():boolean{
+    for(var i=0;i<this._boardSize;i++){
+      if(this._currentState[i].getValue() == "") {return false;}
+    }
+    return true;
   }
 
 

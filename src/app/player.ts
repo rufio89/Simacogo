@@ -41,7 +41,7 @@ export class Player {
     let boardSize: number = currentState.getBoardSize();
     var currentElem;
     var index: Number = 0;
-    for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >0;i-=boardSize){
+    for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >=0;i-=boardSize){
       currentElem = document.getElementById("square-" + i);
 
       if(currentState.getCurrentState()[i].value == ""){
@@ -57,23 +57,33 @@ export class Player {
 
   makeMoveAI(rowInput, currentState): State{
     let boardSize: number = currentState.getBoardSize();
+    let validMove: boolean = false;
     var currentElem;
     var index: Number = 0;
     var newState:State = _.cloneDeep(currentState);
-    for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >0;i-=boardSize){
+    for(var i = ((boardSize*boardSize) -(boardSize+1)) + parseInt(rowInput);i >=0;i-=boardSize){
       currentElem = document.getElementById("square-" + i);
 
       if(newState.getCurrentState()[i].value == ""){
         newState.setCurrentStateValue(i, this._gamePiece, this._gamePieceColor);
         index = i;
+        validMove = true;
         break;
       }
     }
-    this.checkNextTo(currentState,index, this._gamePiece);
-    this.checkDiagonal(currentState,index, this._gamePiece);
-    this.setPlayerScore(newState);
-    this._score = 0;
-    return newState;
+    if(validMove) {
+      this.checkNextTo(currentState, index, this._gamePiece);
+      this.checkDiagonal(currentState, index, this._gamePiece);
+      this.setPlayerScore(newState);
+      if(this._score== -1){
+        let a: number = 5;
+      }
+      this._score = 0;
+      return newState;
+    }
+    else{
+      return null;
+    }
   }
 
   setPlayerScore(newState): void{
@@ -107,7 +117,7 @@ export class Player {
       this.checkNextToUp(currentState, up, turn);
       this.checkNextToLeft(currentState,left,turn);
     }
-    else if(index >0 && (boardSize*boardSize -(boardSize)) && index%boardSize==0){
+    else if(index >0 && index < (boardSize*boardSize -(boardSize)) && index%boardSize==0){
       this.checkNextToUp(currentState, up, turn);
       this.checkNextToRight(currentState,right,turn);
       this.checkNextToDown(currentState, down, turn);
@@ -117,7 +127,7 @@ export class Player {
       this.checkNextToDown(currentState,down,turn);
       this.checkNextToRight(currentState, right, turn);
     }
-    else if(index > boardSize && index < ((boardSize*boardSize)-1) && (index+1)%9==0){
+    else if(index > boardSize && index < ((boardSize*boardSize)-1) && (index+1)%boardSize==0){
       this.checkNextToUp(currentState, up, turn);
       this.checkNextToLeft(currentState, left,turn);
       this.checkNextToDown(currentState, down, turn);
@@ -171,7 +181,7 @@ export class Player {
   checkDiagonal(currentState, index, turn) {
     let boardSize = currentState.getBoardSize();
     var upLeft = parseInt(index) - (boardSize + 1);
-    var upRight = parseInt(index) - (boardSize + 1);
+    var upRight = parseInt(index) - (boardSize - 1);
     var downLeft = parseInt(index) + (boardSize - 1);
     var downRight = parseInt(index) + (boardSize + 1);
 
@@ -190,12 +200,12 @@ export class Player {
       this.checkUpLeft(currentState, upLeft, turn);
     }
     else if(index >0 && index < ((boardSize*boardSize)-boardSize) && index%boardSize==0){
-      this.checkUpRight(currentState, downRight, turn);
+      this.checkUpRight(currentState, upRight, turn);
       this.checkDownRight(currentState, downRight, turn);
     }
     else if(index > 0 && index < boardSize){
       this.checkDownLeft(currentState, downLeft, turn);
-      this.checkNextToRight(currentState, downRight, turn);
+      this.checkDownRight(currentState, downRight, turn);
     }
     else if(index > boardSize && index < ((boardSize*boardSize)-1) && (index+1)%boardSize==0){
       this.checkUpLeft(currentState, upLeft, turn);

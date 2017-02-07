@@ -11,10 +11,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent{
-  boardSize: number = 9;
+  boardSize: number = 4;
   currentState:State = new State();
   board: Array<Token>;
-  rows:Array<number> = [1,2,3,4,5,6,7,8,9] ;
+  rows:Array<number> = [1,2,3,4] ;
   player1: Player = new Player("O", "#FFF", false);
   player2: Player = new Player("X", "#000", true);
   player1Turn: boolean = true;
