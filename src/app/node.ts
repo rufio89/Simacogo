@@ -82,6 +82,12 @@ export class Node {
     return player.makeMoveAI(rowNum,currentState);
 
   }
+  evaluate() : number{
+    let player1Score: number = this._player1Score;
+    let player2Score : number = this._player2Score;
+    return player2Score - player1Score;
+  }
+
 
 
 
