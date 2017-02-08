@@ -11,10 +11,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent{
-  boardSize: number = 4;
+  boardSize: number = 5;
   currentState:State = new State();
   board: Array<Token>;
-  rows:Array<number> = [1,2,3,4] ;
+  rows:Array<number> = [1,2,3,4,5] ;
   player1: Player = new Player("O", "#FFF", false);
   player2: Player = new Player("X", "#000", true);
   player1Turn: boolean = true;
@@ -32,13 +32,29 @@ export class BoardComponent{
   roboTurn(){
     // Return state, flip player switch, and update the score for the UI.
     if (!this.player1Turn) {
-      let m: MiniMax = new MiniMax(this.ply, 0, true, this.currentState);
-      let s: State = m.run(this.player1, this.player2).getState();
-      this.currentState = s;
-      this.board = s.getCurrentState();
+      let mini: MiniMax = new MiniMax(this.ply, 0, true, this.currentState);
+      let endState: State = mini.run(this.player1, this.player2).getState();
+      this.currentState = endState;
+      this.board = endState.getCurrentState();
       this.player1Turn = !this.player1Turn;
-      this.player2Score = s.getPlayer2Score();
+      this.player2Score = endState.getPlayer2Score();
+      if(endState.isTerminal()){
+        this.gameEnd(endState);
+      }
 
+    }
+  }
+
+  gameEnd(state){
+    let p1Score: number = this.player1Score;
+    let p2Score: number = state.getPlayer2Score();
+    console.log(p1Score);
+    console.log(p2Score);
+    if (p1Score > p2Score){
+      alert("Player 1 won by " + (p1Score - p2Score));
+    }
+    else{
+      alert("Player 2 won by " + (p2Score - p1Score));
     }
   }
 
